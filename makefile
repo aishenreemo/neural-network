@@ -5,7 +5,7 @@ DIST = ./dist
 SRC = ./src
 
 FLAGS = -I$(INCLUDE) -Wall
-LIBS = -lncurses -lcollections
+LIBS = -lSDL2 -lcollections
 CC = gcc
 
 OBJECTS = $(patsubst $(SRC)/%.c,$(DIST)/%.o,$(wildcard $(SRC)/*.c))

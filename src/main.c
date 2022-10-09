@@ -1,4 +1,4 @@
-#include <unistd.h>
+#include <SDL2/SDL_timer.h>
 #include <stdlib.h>
 
 #include "application.h"
@@ -10,7 +10,7 @@ int main() {
 		app_listen();
 		app_update();
 		app_render();
-		usleep(1000 / 30); // 30 fps (not exact)
+		SDL_Delay(1000 / 30);
 	}
 
 	app_quit();

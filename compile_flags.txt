@@ -1,4 +1,4 @@
 -I./include/
 -Wall
--lncurses
+-lSDL2
 -lcollections

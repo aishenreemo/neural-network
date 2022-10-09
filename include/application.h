@@ -2,6 +2,7 @@
 #define __APPLICATION_H__
 
 #include <libcollections/vector.h>
+#include <SDL2/SDL.h>
 #include <pthread.h>
 #include <stdbool.h>
 
@@ -16,9 +17,12 @@ struct __application_t__ {
 
 	pthread_mutex_t event_lock;
 	pthread_t event_thread;
+
+	vector_t sdl_event_pump;
 	vector_t event_pump;
 
-	vector_t keypress_queue;
+	SDL_Renderer *renderer;
+	SDL_Window *window;
 };
 
 enum __event_t__ {
