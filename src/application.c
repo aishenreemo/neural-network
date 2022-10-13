@@ -159,6 +159,29 @@ void app_render() {
 		}
 	}
 
+	// draw weights
+	for (uint i = 0; i + 1 < app.layer_size_vec.length; i++) {
+		uint *layer_size_input = vector_get(&app.layer_size_vec, i + 0, NULL);
+		uint *layer_size_output = vector_get(&app.layer_size_vec, i + 1, NULL);
+
+		int x_input = neuron_h_distance * (i + 1);
+		int x_output = neuron_h_distance * (i + 2);
+		int neuron_v_distance_input = screen_height / (1 + *layer_size_input);
+		int neuron_v_distance_output = screen_height / (1 + *layer_size_output);
+
+		for (uint j = 0; j < (*layer_size_input) * (*layer_size_output); j++) {
+			uint ii = j / (*layer_size_output);
+			uint jj = j % (*layer_size_output);
+
+			int x1 = x_input + neuron_radius;
+			int y1 = neuron_v_distance_input * (ii + 1);
+			int x2 = x_output - neuron_radius;
+			int y2 = neuron_v_distance_output * (jj + 1);
+
+			SDL_RenderDrawLine(app.renderer, x1, y1, x2, y2);
+		}
+	}
+
 	SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 255);
 
 	SDL_RenderPresent(app.renderer);
