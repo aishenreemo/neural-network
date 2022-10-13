@@ -137,21 +137,20 @@ void app_render() {
 	SDL_SetRenderDrawColor(app.renderer, 255, 255, 255, 255);
 
 	uint layer_len = app.layer_size_vec.length;
-	uint neuron_h_distance;
-	uint neuron_v_distance;
 
 	uint neuron_width = screen_width / 15;
 	uint neuron_height = screen_height / 10;
 	uint neuron_radius = neuron_width < neuron_height ? neuron_width : neuron_height;
 
 
-	neuron_h_distance = screen_width / (1 + layer_len);
+	int neuron_h_distance = screen_width / (1 + layer_len);
 
+	// draw neurons
 	for (uint i = 0; i < app.layer_size_vec.length; i++) {
 		uint *layer_size = vector_get(&app.layer_size_vec, i, NULL);
 		int x = neuron_h_distance * (i + 1);
 
-		neuron_v_distance = screen_height / (1 + *layer_size);
+		int neuron_v_distance = screen_height / (1 + *layer_size);
 
 		for (uint j = 0; j < *layer_size; j++) {
 			int y = neuron_v_distance * (j + 1);
