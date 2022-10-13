@@ -9,6 +9,7 @@
 #include <stdio.h>
 
 #include "application.h"
+#include "draw.h"
 
 // global vars
 application_t app;
@@ -128,6 +129,38 @@ void app_render() {
 
 	// render gaem
 	SDL_RenderClear(app.renderer);
+
+	int screen_width;
+	int screen_height;
+	SDL_GetWindowSize(app.window, &screen_width, &screen_height);
+
+	SDL_SetRenderDrawColor(app.renderer, 255, 255, 255, 255);
+
+	uint layer_len = app.layer_size_vec.length;
+	uint neuron_h_distance;
+	uint neuron_v_distance;
+
+	uint neuron_width = screen_width / 15;
+	uint neuron_height = screen_height / 10;
+	uint neuron_radius = neuron_width < neuron_height ? neuron_width : neuron_height;
+
+
+	neuron_h_distance = screen_width / (1 + layer_len);
+
+	for (uint i = 0; i < app.layer_size_vec.length; i++) {
+		uint *layer_size = vector_get(&app.layer_size_vec, i, NULL);
+		int x = neuron_h_distance * (i + 1);
+
+		neuron_v_distance = screen_height / (1 + *layer_size);
+
+		for (uint j = 0; j < *layer_size; j++) {
+			int y = neuron_v_distance * (j + 1);
+			draw_circle(x, y, neuron_radius);
+		}
+	}
+
+	SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 255);
+
 	SDL_RenderPresent(app.renderer);
 }
 
