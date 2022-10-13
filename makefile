@@ -4,7 +4,7 @@ INCLUDE = ./include
 DIST = ./dist
 SRC = ./src
 
-FLAGS = -I$(INCLUDE) -Wall
+FLAGS = -I$(INCLUDE) -Wall -O3 -march=native
 LIBS = -lSDL2 -lcollections
 CC = gcc
 
