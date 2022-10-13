@@ -45,7 +45,7 @@ void app_init() {
 		app_quit();
 	}
 
-	app.window = SDL_CreateWindow("GAME",
+	app.window = SDL_CreateWindow("Neural Network Test",
                 SDL_WINDOWPOS_UNDEFINED,
                 SDL_WINDOWPOS_UNDEFINED,
                 800, 600,
