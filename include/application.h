@@ -40,4 +40,7 @@ void app_listen();
 void app_update();
 void app_render();
 
+// global variables
+extern application_t app;
+
 #endif // __APPLICATION_H__
