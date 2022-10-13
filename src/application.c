@@ -138,10 +138,12 @@ void app_render() {
 
 	uint layer_len = app.layer_size_vec.length;
 
-	uint neuron_width = screen_width / 15;
-	uint neuron_height = screen_height / 10;
-	uint neuron_radius = neuron_width < neuron_height ? neuron_width : neuron_height;
+	uint neuron_width = screen_width / 20;
+	uint neuron_height = screen_height / 15;
 
+	uint neuron_radius;
+	neuron_radius = neuron_width < neuron_height ? neuron_width : neuron_height;
+	neuron_radius = neuron_radius > 30 ? neuron_radius : 30;
 
 	int neuron_h_distance = screen_width / (1 + layer_len);
 
