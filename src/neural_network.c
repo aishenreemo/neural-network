@@ -1,4 +1,9 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
 #include "neural_network.h"
+
 
 // private function declarations
 void neural_network_layer_init(neural_network_layer_t *, uint, uint);
@@ -6,6 +11,8 @@ void neural_network_layer_calc_outputs(neural_network_layer_t *, vector_t *, vec
 
 // public function definitions
 void neural_network_init(neural_network_t *neural_network, vector_t *layer_size_vec) {
+	srand((uint) time(NULL));
+
 	vector_init(&neural_network->layer_vec, NULL);
 
 	for (uint i = 0; (i + 1) < layer_size_vec->length; i++) {
@@ -63,6 +70,25 @@ void neural_network_calc_outputs(
 	vector_drop(&mutable_vec);
 }
 
+void neural_network_randomize_weights(neural_network_t *neural_network) {
+	double height = NEURAL_NETWORK_WEIGHT_AMPLITUDE * 2;
+
+	for (uint i = 0; i < neural_network->layer_vec.length; i++) {
+		neural_network_layer_t *layer = vector_get(&neural_network->layer_vec, i, NULL);
+
+		for (uint j = 0; j < layer->weight_vec.length; j++) {
+			double *val = vector_get(&layer->weight_vec, j, NULL);
+			double rand_val;
+			rand_val = (double) rand();
+			rand_val /= (double) RAND_MAX;
+			rand_val *= height;
+			rand_val -= NEURAL_NETWORK_WEIGHT_AMPLITUDE;
+
+			*val = rand_val;
+		}
+	}
+}
+
 // private function definitions
 void neural_network_layer_init(
 	neural_network_layer_t *layer,
@@ -75,14 +101,14 @@ void neural_network_layer_init(
 	// initialize weights
 	vector_init(&layer->weight_vec, NULL);
 	for (uint i = 0; i < input_len * output_len; i++) {
-		uint *item = malloc(sizeof(double)); *item = 0.0;
+		double *item = malloc(sizeof(double)); *item = 0.0;
 		vector_push(&layer->weight_vec, item, NULL);
 	}
 
 	// initialize biases
 	vector_init(&layer->bias_vec, NULL);
 	for (uint i = 0; i < output_len; i++) {
-		uint *item = malloc(sizeof(double)); *item = 0.0;
+		double *item = malloc(sizeof(double)); *item = 0.0;
 		vector_push(&layer->bias_vec, item, NULL);
 	}
 }

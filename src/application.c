@@ -41,6 +41,7 @@ void app_init() {
 	lsv_item = malloc(sizeof(uint)); *lsv_item = 2; vector_push(&app.layer_size_vec, lsv_item, NULL);
 
 	neural_network_init(&app.network, &app.layer_size_vec);
+	neural_network_randomize_weights(&app.network);
 
 	// initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {

@@ -15,11 +15,14 @@ struct __neural_network_layer_t__ {
 	vector_t bias_vec;
 };
 
+static const double NEURAL_NETWORK_WEIGHT_AMPLITUDE = 0.1;
+
 typedef struct __neural_network_layer_t__ neural_network_layer_t;
 typedef struct __neural_network_t__ neural_network_t;
 
 void neural_network_init(neural_network_t *, vector_t *);
 void neural_network_calc_outputs(neural_network_t *, vector_t *, vector_t *);
 void neural_network_drop(neural_network_t *);
+void neural_network_randomize_weights(neural_network_t *);
 
 #endif // __NEURAL_NETWORK_H__
