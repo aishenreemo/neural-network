@@ -28,7 +28,5 @@ int main() {
 	// unreachable code
 
 	// quit application (de-allocs used memory)
-	app_quit();
-
-	return EXIT_SUCCESS;
+	app_quit(EXIT_SUCCESS);
 }

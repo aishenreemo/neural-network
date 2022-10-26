@@ -45,7 +45,7 @@ void app_init() {
 	// initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("error initializing SDL: %s\n", SDL_GetError());
-		app_quit();
+		app_quit(EXIT_FAILURE);
 	}
 
 	app.window = SDL_CreateWindow("Neural Network Test",
@@ -64,7 +64,7 @@ void app_init() {
 	pthread_create(&app.event_thread, NULL, app_event_thread, NULL);
 }
 
-void app_quit() {
+void app_quit(int exit_code) {
 	// check if app is not running
 	if (!app.running) {
 		printf("fatal(app_quit): no 'app' instance running. aborting.");
@@ -91,7 +91,7 @@ void app_quit() {
 
 	// abort program
 	printf("exiting....\n");
-	exit(EXIT_SUCCESS);
+	exit(exit_code);
 }
 
 void app_listen() {
@@ -132,7 +132,7 @@ void app_update() {
 
 		// if command tells the program to abort
 		case EVENT_QUIT:
-			app_quit();
+			app_quit(EXIT_SUCCESS);
 			break; // unreachable
 		}
 

@@ -35,7 +35,7 @@ typedef enum __event_t__ event_t;
 
 // public fn decl
 void app_init();
-void app_quit();
+void app_quit(int);
 void app_listen();
 void app_update();
 void app_render();
